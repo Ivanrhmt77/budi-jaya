@@ -8,7 +8,7 @@ public class Departemen {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "nama_departemen", nullable = false, length = 100)
     private String namaDepartemen;
@@ -16,12 +16,12 @@ public class Departemen {
     public Departemen() {
     }
 
-    public Departemen(int id, String namaDepartemen) {
+    public Departemen(Integer id, String namaDepartemen) {
         this.id = id;
         this.namaDepartemen = namaDepartemen;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -29,7 +29,7 @@ public class Departemen {
         return namaDepartemen;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -8,7 +8,7 @@ public class Jabatan {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "nama_jabatan", nullable = false, length = 100)
     private String namaJabatan;
@@ -16,12 +16,12 @@ public class Jabatan {
     public Jabatan() {
     }
 
-    public Jabatan(int id, String namaJabatan) {
+    public Jabatan(Integer id, String namaJabatan) {
         this.id = id;
         this.namaJabatan = namaJabatan;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -29,7 +29,7 @@ public class Jabatan {
         return namaJabatan;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

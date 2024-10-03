@@ -11,7 +11,7 @@ public class Absensi {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "karyawan_id", nullable = false)
@@ -34,7 +34,7 @@ public class Absensi {
     public Absensi() {
     }
 
-    public Absensi(int id, Karyawan karyawanId, Date tanggal, LocalTime waktuMasuk, LocalTime waktuKeluar, StatusAbsensi status) {
+    public Absensi(Integer id, Karyawan karyawanId, Date tanggal, LocalTime waktuMasuk, LocalTime waktuKeluar, StatusAbsensi status) {
         this.id = id;
         this.karyawanId = karyawanId;
         this.tanggal = tanggal;
@@ -42,7 +42,7 @@ public class Absensi {
         this.waktuKeluar = waktuKeluar;
         this.status = status;
     }
-    public int getId() {
+    public Integer getId() {
         return id;
     }
     public Karyawan getKaryawanId() {
@@ -60,7 +60,7 @@ public class Absensi {
     public StatusAbsensi getStatus() {
         return status;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public void setKaryawanId(Karyawan karyawanId) {

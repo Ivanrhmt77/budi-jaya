@@ -8,7 +8,7 @@ public class Gaji {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "karyawan_id", nullable = false)
@@ -18,22 +18,22 @@ public class Gaji {
     private String bulan;
 
     @Column(name = "gaji_pokok", nullable = false)
-    private double gajiPokok;
+    private Double gajiPokok;
 
     @Column(name = "tunjangan", nullable = false)
-    private double tunjangan;
+    private Double tunjangan;
 
     @Column(name = "potongan", nullable = false)
-    private double potongan;
+    private Double potongan;
 
     @Column(name = "total_gaji", nullable = false)
-    private double totalGaji;
+    private Double totalGaji;
     
     public Gaji() {
     }
 
-    public Gaji(int id, Karyawan karyawanId, String bulan, double gajiPokok, double tunjangan, double potongan,
-            double totalGaji) {
+    public Gaji(Integer id, Karyawan karyawanId, String bulan, Double gajiPokok, Double tunjangan, Double potongan,
+            Double totalGaji) {
         this.id = id;
         this.karyawanId = karyawanId;
         this.bulan = bulan;
@@ -42,7 +42,7 @@ public class Gaji {
         this.potongan = potongan;
         this.totalGaji = totalGaji;
     }
-    public int getId() {
+    public Integer getId() {
         return id;
     }
     public Karyawan getKaryawanId() {
@@ -51,19 +51,19 @@ public class Gaji {
     public String getBulan() {
         return bulan;
     }
-    public double getGajiPokok() {
+    public Double getGajiPokok() {
         return gajiPokok;
     }
-    public double getTunjangan() {
+    public Double getTunjangan() {
         return tunjangan;
     }
-    public double getPotongan() {
+    public Double getPotongan() {
         return potongan;
     }
-    public double getTotalGaji() {
+    public Double getTotalGaji() {
         return totalGaji;
     }
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     public void setKaryawanId(Karyawan karyawanId) {
@@ -72,16 +72,16 @@ public class Gaji {
     public void setBulan(String bulan) {
         this.bulan = bulan;
     }
-    public void setGajiPokok(double gajiPokok) {
+    public void setGajiPokok(Double gajiPokok) {
         this.gajiPokok = gajiPokok;
     }
-    public void setTunjangan(double tunjangan) {
+    public void setTunjangan(Double tunjangan) {
         this.tunjangan = tunjangan;
     }
-    public void setPotongan(double potongan) {
+    public void setPotongan(Double potongan) {
         this.potongan = potongan;
     }
-    public void setTotalGaji(double totalGaji) {
+    public void setTotalGaji(Double totalGaji) {
         this.totalGaji = totalGaji;
     }
 
