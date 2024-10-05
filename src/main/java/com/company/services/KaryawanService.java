@@ -13,8 +13,27 @@ public class KaryawanService {
     @Autowired
     private KaryawanRepo karyawanRepo;
 
-    public Karyawan save(Karyawan karyawan) {
+    public Karyawan create(Karyawan karyawan) {
+        if (karyawanRepo.findByEmail(karyawan.getEmail()) != null) {
+            throw new IllegalArgumentException("Email already exists: " + karyawan.getEmail());
+        }
         return karyawanRepo.save(karyawan);
+    }
+
+    public Karyawan updateOne(Integer id, Karyawan karyawan) {
+        Karyawan existingKaryawan = karyawanRepo.findById(id).get();
+
+        existingKaryawan.setNamaLengkap(karyawan.getNamaLengkap());
+        existingKaryawan.setEmail(karyawan.getEmail());
+        existingKaryawan.setNomorTelepon(karyawan.getNomorTelepon());
+        existingKaryawan.setTanggalLahir(karyawan.getTanggalLahir());
+        existingKaryawan.setAlamat(karyawan.getAlamat());
+        existingKaryawan.setTanggalMasuk(karyawan.getTanggalMasuk());
+        existingKaryawan.setDepartemen(karyawan.getDepartemen());
+        existingKaryawan.setJabatan(karyawan.getJabatan());
+        existingKaryawan.setStatus(karyawan.getStatus());
+
+        return karyawanRepo.save(existingKaryawan);
     }
 
     public Karyawan findOne(Integer id) {

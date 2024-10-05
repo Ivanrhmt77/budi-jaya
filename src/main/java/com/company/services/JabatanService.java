@@ -13,8 +13,16 @@ public class JabatanService {
     @Autowired
     private JabatanRepo jabatanRepo;
 
-    public Jabatan save(Jabatan jabatan) {
+    public Jabatan create(Jabatan jabatan) {
         return jabatanRepo.save(jabatan);
+    }
+
+    public Jabatan updateOne(Integer id, Jabatan jabatan) {
+        Jabatan existingJabatan = jabatanRepo.findById(id).get();
+
+        existingJabatan.setnamaJabatan(jabatan.getnamaJabatan());
+
+        return jabatanRepo.save(existingJabatan);
     }
 
     public Jabatan findOne(Integer id) {

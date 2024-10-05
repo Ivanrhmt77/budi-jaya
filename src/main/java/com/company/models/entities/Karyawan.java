@@ -42,7 +42,7 @@ public class Karyawan implements Serializable{
     private Jabatan jabatan;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "ENUM('aktif', 'nonaktif')")
+    @Column(name = "status")
     private StatusKaryawan status;
 
     public Karyawan() {

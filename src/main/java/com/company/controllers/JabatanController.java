@@ -21,7 +21,7 @@ public class JabatanController {
 
     @PostMapping
     public Jabatan create(@RequestBody Jabatan jabatan) {
-        return jabatanService.save(jabatan);
+        return jabatanService.create(jabatan);
     }
 
     @GetMapping
@@ -34,9 +34,9 @@ public class JabatanController {
         return jabatanService.findOne(id);
     }
 
-    @PutMapping
-    public Jabatan update(@RequestBody Jabatan jabatan) {
-        return jabatanService.save(jabatan);
+    @PutMapping("/{id}")
+    public Jabatan updateOne(@PathVariable("id") Integer id, @RequestBody Jabatan jabatan) {
+        return jabatanService.updateOne(id, jabatan);
     }
 
     @DeleteMapping("/{id}")

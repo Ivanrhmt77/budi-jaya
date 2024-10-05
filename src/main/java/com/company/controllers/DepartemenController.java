@@ -21,7 +21,7 @@ public class DepartemenController {
 
     @PostMapping
     public Departemen create(@RequestBody Departemen departemen) {
-        return departemenService.save(departemen);
+        return departemenService.create(departemen);
     }
 
     @GetMapping
@@ -34,9 +34,9 @@ public class DepartemenController {
         return departemenService.findOne(id);
     }
 
-    @PutMapping
-    public Departemen update(@RequestBody Departemen departemen) {
-        return departemenService.save(departemen);
+    @PutMapping("/{id}")
+    public Departemen updateOne(@PathVariable("id") Integer id, @RequestBody Departemen departemen) {
+        return departemenService.updateOne(id, departemen);
     }
 
     @DeleteMapping("/{id}")

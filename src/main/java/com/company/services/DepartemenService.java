@@ -13,8 +13,16 @@ public class DepartemenService {
     @Autowired
     private DepartemenRepo departemenRepo;
 
-    public Departemen save(Departemen departemen) {
+    public Departemen create(Departemen departemen) {
         return departemenRepo.save(departemen);
+    }
+
+    public Departemen updateOne(Integer id, Departemen departemen) {
+        Departemen existingDepartemen = departemenRepo.findById(id).get();
+
+        existingDepartemen.setnamaDepartemen(departemen.getnamaDepartemen());
+
+        return departemenRepo.save(existingDepartemen);
     }
 
     public Departemen findOne(Integer id) {

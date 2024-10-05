@@ -21,7 +21,7 @@ public class KaryawanController {
 
     @PostMapping
     public Karyawan create(@RequestBody Karyawan karyawan) {
-        return karyawanService.save(karyawan);
+        return karyawanService.create(karyawan);
     }
 
     @GetMapping
@@ -34,9 +34,9 @@ public class KaryawanController {
         return karyawanService.findOne(id);
     }
 
-    @PutMapping
-    public Karyawan update(@RequestBody Karyawan karyawan) {
-        return karyawanService.save(karyawan);
+    @PutMapping("/{id}")
+    public Karyawan updateOne(@PathVariable("id") Integer id, @RequestBody Karyawan karyawan) {
+        return karyawanService.updateOne(id, karyawan);
     }
 
     @DeleteMapping("/{id}")
