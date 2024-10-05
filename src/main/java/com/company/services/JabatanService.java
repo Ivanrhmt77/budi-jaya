@@ -17,7 +17,7 @@ public class JabatanService {
         return jabatanRepo.save(jabatan);
     }
 
-    public Jabatan findById(Integer id) {
+    public Jabatan findOne(Integer id) {
         return jabatanRepo.findById(id).get();
     }
 

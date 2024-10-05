@@ -9,38 +9,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.company.models.entities.Jabatan;
-import com.company.services.JabatanService;
+import com.company.models.entities.Departemen;
+import com.company.services.DepartemenService;
 
 @RestController
-@RequestMapping("/api/jabatan")
-public class JabatanController {
+@RequestMapping("/api/departemen")
+public class DepartemenController {
     
     @Autowired
-    private JabatanService jabatanService;
+    private DepartemenService departemenService;
 
     @PostMapping
-    public Jabatan create(@RequestBody Jabatan jabatan) {
-        return jabatanService.save(jabatan);
+    public Departemen create(@RequestBody Departemen departemen) {
+        return departemenService.save(departemen);
     }
 
     @GetMapping
-    public Iterable<Jabatan> findAll() {
-        return jabatanService.findAll();
+    public Iterable<Departemen> findAll() {
+        return departemenService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Jabatan findOne(@PathVariable("id") Integer id) {
-        return jabatanService.findOne(id);
+    public Departemen findOne(@PathVariable("id") Integer id) {
+        return departemenService.findOne(id);
     }
 
     @PutMapping
-    public Jabatan update(@RequestBody Jabatan jabatan) {
-        return jabatanService.save(jabatan);
+    public Departemen update(@RequestBody Departemen departemen) {
+        return departemenService.save(departemen);
     }
 
     @DeleteMapping("/{id}")
     public void removeOne(@PathVariable("id") Integer id) {
-        jabatanService.removeOne(id);
+        departemenService.removeOne(id);
     }
 }
