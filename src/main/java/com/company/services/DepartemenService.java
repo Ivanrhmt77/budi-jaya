@@ -18,7 +18,7 @@ public class DepartemenService {
     }
 
     public Departemen updateOne(Integer id, Departemen departemen) {
-        Departemen existingDepartemen = departemenRepo.findById(id).get();
+        Departemen existingDepartemen = this.findOne(id);
 
         existingDepartemen.setnamaDepartemen(departemen.getnamaDepartemen());
 

@@ -28,7 +28,7 @@ public class Absensi {
     private LocalTime waktuKeluar;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_absensi", columnDefinition = "ENUM('hadir', 'izin', 'sakit', 'alpha')")
+    @Column(name = "status_absensi", columnDefinition = "ENUM('HADIR', 'IZIN', 'SAKIT', 'ALPHA')")
     private StatusAbsensi status;
     
     public Absensi() {

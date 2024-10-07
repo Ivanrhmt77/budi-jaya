@@ -18,7 +18,7 @@ public class JabatanService {
     }
 
     public Jabatan updateOne(Integer id, Jabatan jabatan) {
-        Jabatan existingJabatan = jabatanRepo.findById(id).get();
+        Jabatan existingJabatan = this.findOne(id);
 
         existingJabatan.setnamaJabatan(jabatan.getnamaJabatan());
 

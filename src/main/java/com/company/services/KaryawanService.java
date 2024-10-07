@@ -21,7 +21,7 @@ public class KaryawanService {
     }
 
     public Karyawan updateOne(Integer id, Karyawan karyawan) {
-        Karyawan existingKaryawan = karyawanRepo.findById(id).get();
+        Karyawan existingKaryawan = this.findOne(id);
 
         existingKaryawan.setNamaLengkap(karyawan.getNamaLengkap());
         existingKaryawan.setEmail(karyawan.getEmail());
