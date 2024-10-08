@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.company.models.entities.Departemen;
 import com.company.models.repository.DepartemenRepo;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -26,7 +27,9 @@ public class DepartemenService {
     }
 
     public Departemen findOne(Integer id) {
-        return departemenRepo.findById(id).get();
+        return departemenRepo.findById(id).orElseThrow(() ->
+            new EntityNotFoundException("Absensi with ID " + id + " not found")
+        );
     }
 
     public Iterable<Departemen> findAll() {
@@ -34,6 +37,10 @@ public class DepartemenService {
     }
 
     public void removeOne(Integer id) {
+        if(!departemenRepo.existsById(id)) {
+            throw new EntityNotFoundException("Absensi with ID " + id + " not found");
+        }
+
         departemenRepo.deleteById(id);
     }
 }

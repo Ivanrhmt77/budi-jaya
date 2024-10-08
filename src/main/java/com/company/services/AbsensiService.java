@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.company.models.entities.Absensi;
 import com.company.models.repository.AbsensiRepo;
+
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -30,7 +32,9 @@ public class AbsensiService {
     }
 
     public Absensi findOne(Integer id) {
-        return absensiRepo.findById(id).get();
+        return absensiRepo.findById(id).orElseThrow(() -> 
+            new EntityNotFoundException("Absensi with ID " + id + " not found")
+        );
     }
 
     public Iterable<Absensi> findAll() {
@@ -38,6 +42,11 @@ public class AbsensiService {
     }
 
     public void removeOne(Integer id) {
+        if (!absensiRepo.existsById(id)) {
+            throw new EntityNotFoundException("Absensi with ID " + id + " not found, unable to delete");
+        }
+        
         absensiRepo.deleteById(id);
     }
+    
 }

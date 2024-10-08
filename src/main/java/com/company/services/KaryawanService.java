@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.company.models.entities.Karyawan;
 import com.company.models.repository.KaryawanRepo;
+
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -37,7 +39,9 @@ public class KaryawanService {
     }
 
     public Karyawan findOne(Integer id) {
-        return karyawanRepo.findById(id).get();
+        return karyawanRepo.findById(id).orElseThrow(() ->
+            new EntityNotFoundException("Absensi with ID " + id + " not found")
+        );
     }
 
     public Iterable<Karyawan> findAll() {
@@ -45,6 +49,10 @@ public class KaryawanService {
     }
 
     public void removeOne(Integer id) {
+        if(karyawanRepo.existsById(id)) {
+            throw new EntityNotFoundException("Absensi with ID " + id + " not found");
+        }
+
         karyawanRepo.deleteById(id);
     }
 }

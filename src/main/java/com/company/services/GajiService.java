@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.company.models.entities.Gaji;
 import com.company.models.repository.GajiRepo;
+
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -31,7 +33,9 @@ public class GajiService {
     }
 
     public Gaji findOne(Integer id) {
-        return gajiRepo.findById(id).get();
+        return gajiRepo.findById(id).orElseThrow(() ->
+            new EntityNotFoundException("Absensi with ID " + id + " not found")
+        );
     }
 
     public Iterable<Gaji> findAll() {
@@ -39,6 +43,10 @@ public class GajiService {
     }
 
     public void removeOne(Integer id) {
+        if (!gajiRepo.existsById(id)) {
+            throw new EntityNotFoundException("Absensi with ID " + id + " not found");
+        }
+
         gajiRepo.deleteById(id);
     }
 }
