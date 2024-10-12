@@ -1,19 +1,23 @@
 package com.company.controllers;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.company.models.entities.Departemen;
 import com.company.models.entities.Jabatan;
 import com.company.models.entities.Karyawan;
 import com.company.models.entities.enums.StatusKaryawan;
 import com.company.services.KaryawanService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api/karyawan")
@@ -29,26 +33,16 @@ public class KaryawanController {
 
     @GetMapping
     public Object find(@RequestParam(required = false) Integer id,
-                        @RequestParam(required = false) String email,
                         @RequestParam(required = false) String namaLengkap,
+                        @RequestParam(required = false) String email,
+                        @RequestParam(required = false) String nomorTelepon,
+                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date tanggalLahir,
+                        @RequestParam(required = false) String alamat,
+                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date tanggalMasuk,
                         @RequestParam(required = false) Departemen departemen,
                         @RequestParam(required = false) Jabatan jabatan,
                         @RequestParam(required = false) StatusKaryawan status) {
-        if(id != null) {
-            return karyawanService.findOne(id);
-        } else if(email != null) {
-            return karyawanService.findByEmail(email);
-        } else if(namaLengkap != null) {
-            return karyawanService.findByNamaLengkap(namaLengkap);
-        } else if(departemen != null) {
-            return karyawanService.findByDepartemen(departemen);
-        } else if(jabatan != null) {
-            return karyawanService.findByJabatan(jabatan);
-        } else if(status != null) {
-            return karyawanService.findByStatus(status);
-        } else {
-            return karyawanService.findAll();
-        }
+        return karyawanService.find(id, namaLengkap, email, nomorTelepon, tanggalLahir, alamat, tanggalMasuk, departemen, jabatan, status);
     }
 
     @PutMapping("/update")

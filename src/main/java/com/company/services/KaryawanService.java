@@ -1,5 +1,10 @@
 package com.company.services;
 
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +31,36 @@ public class KaryawanService {
         return karyawanRepo.save(karyawan);
     }
 
+    public List<Karyawan> find(Integer id, String namaLengkap, String email, String nomorTelepon, Date tanggalLahir, String alamat, Date tanggalMasuk, Departemen departemen, Jabatan jabatan, StatusKaryawan status) {
+        List<Karyawan> karyawans = new ArrayList<>();
+        karyawanRepo.findAll().forEach(karyawans::add);
+
+        List<Karyawan> filteredKaryawans = karyawans.stream()
+            .filter(karyawan -> (id == null || karyawan.getId().equals(id)))
+            .filter(karyawan -> (namaLengkap == null || karyawan.getNamaLengkap().equalsIgnoreCase(namaLengkap)))
+            .filter(karyawan -> (email == null || karyawan.getEmail().equals(email)))
+            .filter(karyawan -> (nomorTelepon == null || karyawan.getNomorTelepon().equals(nomorTelepon)))
+            .filter(karyawan -> (tanggalLahir == null || karyawan.getTanggalLahir().equals(tanggalLahir)))
+            .filter(karyawan -> (alamat == null || karyawan.getAlamat().equalsIgnoreCase(alamat)))
+            .filter(karyawan -> (tanggalMasuk == null || karyawan.getTanggalMasuk().equals(tanggalMasuk)))
+            .filter(karyawan -> (departemen == null || karyawan.getDepartemen().equals(departemen)))
+            .filter(karyawan -> (jabatan == null || karyawan.getJabatan().equals(jabatan)))
+            .filter(karyawan -> (status == null || karyawan.getStatus().equals(status)))
+            .collect(Collectors.toList());
+        
+        if(filteredKaryawans.isEmpty()) {
+            throw new EntityNotFoundException("Karyawan not found");
+        }
+
+        return filteredKaryawans;
+    }
+
+    private Karyawan findOne(Integer id) {
+        return karyawanRepo.findById(id).orElseThrow(() ->
+            new EntityNotFoundException("Karyawan with ID " + id + " not found")
+        );
+    }
+
     public Karyawan updateOne(Integer id, Karyawan karyawan) {
         Karyawan existingKaryawan = this.findOne(id);
 
@@ -40,36 +75,6 @@ public class KaryawanService {
         existingKaryawan.setStatus(karyawan.getStatus());
 
         return karyawanRepo.save(existingKaryawan);
-    }
-
-    public Karyawan findOne(Integer id) {
-        return karyawanRepo.findById(id).orElseThrow(() ->
-            new EntityNotFoundException("Absensi with ID " + id + " not found")
-        );
-    }
-
-    public Iterable<Karyawan> findAll() {
-        return karyawanRepo.findAll();
-    }
-
-    public Iterable<Karyawan> findByEmail(String email) {
-        return karyawanRepo.findByEmail(email);
-    }
-
-    public Iterable<Karyawan> findByNamaLengkap(String namaLengkap) {
-        return karyawanRepo.findByNamaLengkap(namaLengkap);
-    }
-
-    public Iterable<Karyawan> findByDepartemen(Departemen departemen) {
-        return karyawanRepo.findByDepartemen(departemen);
-    }
-
-    public Iterable<Karyawan> findByJabatan(Jabatan jabatan) {
-        return karyawanRepo.findByJabatan(jabatan);
-    }
-
-    public Iterable<Karyawan> findByStatus(StatusKaryawan status) {
-        return karyawanRepo.findByStatus(status);
     }
 
     public void removeOne(Integer id) {

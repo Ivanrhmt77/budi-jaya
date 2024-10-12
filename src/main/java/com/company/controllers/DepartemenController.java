@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.company.models.entities.Departemen;
 import com.company.services.DepartemenService;
 
@@ -27,13 +28,7 @@ public class DepartemenController {
     @GetMapping
     public Object find(@RequestParam(required = false) Integer id,
                         @RequestParam(required = false) String namaDepartemen) {
-        if(id != null) {
-            return departemenService.findOne(id);
-        } else if(namaDepartemen != null) {
-            return departemenService.findByNamaDepartemen(namaDepartemen);
-        } else {
-            return departemenService.findAll();
-        }
+        return departemenService.find(id, namaDepartemen);
     }
 
     @PutMapping("/update")
