@@ -36,6 +36,10 @@ public class DepartemenService {
         return departemenRepo.findAll();
     }
 
+    public Iterable<Departemen> findByNamaDepartemen(String namaDepartemen) {
+        return departemenRepo.findByNamaDepartemen(namaDepartemen);
+    }
+
     public void removeOne(Integer id) {
         if(!departemenRepo.existsById(id)) {
             throw new EntityNotFoundException("Absensi with ID " + id + " not found");

@@ -36,6 +36,10 @@ public class JabatanService {
     public Iterable<Jabatan> findAll() {
         return jabatanRepo.findAll();
     }
+    
+    public Iterable<Jabatan> findByNamaJabatan(String namaJabatan) {
+        return jabatanRepo.findByNamaJabatan(namaJabatan);
+    }
 
     public void removeOne(Integer id) {
         if(jabatanRepo.existsById(id)) {

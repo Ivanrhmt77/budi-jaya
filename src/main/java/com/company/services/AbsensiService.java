@@ -1,10 +1,11 @@
 package com.company.services;
 
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.company.models.entities.Absensi;
+import com.company.models.entities.enums.StatusAbsensi;
 import com.company.models.repository.AbsensiRepo;
-
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
@@ -39,6 +40,14 @@ public class AbsensiService {
 
     public Iterable<Absensi> findAll() {
         return absensiRepo.findAll();
+    }
+
+    public Iterable<Absensi> findByTanggal(Date tanggal) {
+        return absensiRepo.findByTanggal(tanggal);
+    }
+
+    public Iterable<Absensi> findByStatus(StatusAbsensi status) {
+        return absensiRepo.findByStatus(status);
     }
 
     public void removeOne(Integer id) {

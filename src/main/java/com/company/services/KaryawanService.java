@@ -2,7 +2,11 @@ package com.company.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.company.models.entities.Departemen;
+import com.company.models.entities.Jabatan;
 import com.company.models.entities.Karyawan;
+import com.company.models.entities.enums.StatusKaryawan;
 import com.company.models.repository.KaryawanRepo;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -46,6 +50,26 @@ public class KaryawanService {
 
     public Iterable<Karyawan> findAll() {
         return karyawanRepo.findAll();
+    }
+
+    public Iterable<Karyawan> findByEmail(String email) {
+        return karyawanRepo.findByEmail(email);
+    }
+
+    public Iterable<Karyawan> findByNamaLengkap(String namaLengkap) {
+        return karyawanRepo.findByNamaLengkap(namaLengkap);
+    }
+
+    public Iterable<Karyawan> findByDepartemen(Departemen departemen) {
+        return karyawanRepo.findByDepartemen(departemen);
+    }
+
+    public Iterable<Karyawan> findByJabatan(Jabatan jabatan) {
+        return karyawanRepo.findByJabatan(jabatan);
+    }
+
+    public Iterable<Karyawan> findByStatus(StatusKaryawan status) {
+        return karyawanRepo.findByStatus(status);
     }
 
     public void removeOne(Integer id) {

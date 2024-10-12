@@ -42,6 +42,10 @@ public class GajiService {
         return gajiRepo.findAll();
     }
 
+    public Iterable<Gaji> findByBulan(String bulan) {
+        return gajiRepo.findByBulan(bulan);
+    }
+
     public void removeOne(Integer id) {
         if (!gajiRepo.existsById(id)) {
             throw new EntityNotFoundException("Absensi with ID " + id + " not found");
