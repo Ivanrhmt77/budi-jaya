@@ -25,7 +25,7 @@ public class Departemen {
         return id;
     }
 
-    public String getnamaDepartemen() {
+    public String getNamaDepartemen() {
         return namaDepartemen;
     }
 
@@ -33,7 +33,7 @@ public class Departemen {
         this.id = id;
     }
 
-    public void setnamaDepartemen(String namaDepartemen) {
+    public void setNamaDepartemen(String namaDepartemen) {
         this.namaDepartemen = namaDepartemen;
     }
 }

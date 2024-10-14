@@ -57,11 +57,11 @@ public class AbsensiService {
     public Absensi updateOne(Integer id, Absensi absensi) {
         Absensi existingAbsensi = this.findOne(id);
 
-        existingAbsensi.setKaryawanId(absensi.getKaryawanId());
-        existingAbsensi.setStatus(absensi.getStatus());
-        existingAbsensi.setTanggal(absensi.getTanggal());
-        existingAbsensi.setWaktuKeluar(absensi.getWaktuKeluar());
-        existingAbsensi.setWaktuMasuk(absensi.getWaktuMasuk());
+        if(absensi.getKaryawanId() != null) existingAbsensi.setKaryawanId(absensi.getKaryawanId());
+        if(absensi.getStatus() != null) existingAbsensi.setStatus(absensi.getStatus());
+        if(absensi.getTanggal() != null) existingAbsensi.setTanggal(absensi.getTanggal());
+        if(absensi.getWaktuKeluar() != null) existingAbsensi.setWaktuKeluar(absensi.getWaktuKeluar());
+        if(absensi.getWaktuMasuk() != null) existingAbsensi.setWaktuMasuk(absensi.getWaktuMasuk());
         
         return absensiRepo.save(existingAbsensi);
     }

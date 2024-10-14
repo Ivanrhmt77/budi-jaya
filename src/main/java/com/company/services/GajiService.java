@@ -55,12 +55,12 @@ public class GajiService {
     public Gaji updateOne(Integer id, Gaji gaji) {
         Gaji existingGaji = this.findOne(id);
 
-        existingGaji.setKaryawanId(gaji.getKaryawanId());
-        existingGaji.setBulan(gaji.getBulan());
-        existingGaji.setGajiPokok(gaji.getGajiPokok());
-        existingGaji.setPotongan(gaji.getPotongan());
-        existingGaji.setTotalGaji(gaji.getTotalGaji());
-        existingGaji.setTunjangan(gaji.getTunjangan());
+        if(gaji.getKaryawanId() != null) existingGaji.setKaryawanId(gaji.getKaryawanId());
+        if(gaji.getBulan() != null) existingGaji.setBulan(gaji.getBulan());
+        if(gaji.getGajiPokok() != null) existingGaji.setGajiPokok(gaji.getGajiPokok());
+        if(gaji.getPotongan() != null) existingGaji.setPotongan(gaji.getPotongan());
+        if(gaji.getTotalGaji() != null) existingGaji.setTotalGaji(gaji.getTotalGaji());
+        if(gaji.getTunjangan() != null) existingGaji.setTunjangan(gaji.getTunjangan());
 
         return gajiRepo.save(existingGaji);
     }

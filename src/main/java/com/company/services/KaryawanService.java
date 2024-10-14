@@ -64,24 +64,22 @@ public class KaryawanService {
     public Karyawan updateOne(Integer id, Karyawan karyawan) {
         Karyawan existingKaryawan = this.findOne(id);
 
-        existingKaryawan.setNamaLengkap(karyawan.getNamaLengkap());
-        existingKaryawan.setEmail(karyawan.getEmail());
-        existingKaryawan.setNomorTelepon(karyawan.getNomorTelepon());
-        existingKaryawan.setTanggalLahir(karyawan.getTanggalLahir());
-        existingKaryawan.setAlamat(karyawan.getAlamat());
-        existingKaryawan.setTanggalMasuk(karyawan.getTanggalMasuk());
-        existingKaryawan.setDepartemen(karyawan.getDepartemen());
-        existingKaryawan.setJabatan(karyawan.getJabatan());
-        existingKaryawan.setStatus(karyawan.getStatus());
+        if(karyawan.getNamaLengkap() != null) existingKaryawan.setNamaLengkap(karyawan.getNamaLengkap());
+        if(karyawan.getEmail() != null) existingKaryawan.setEmail(karyawan.getEmail());
+        if(karyawan.getNomorTelepon() != null) existingKaryawan.setNomorTelepon(karyawan.getNomorTelepon());
+        if(karyawan.getTanggalLahir() != null) existingKaryawan.setTanggalLahir(karyawan.getTanggalLahir());
+        if(karyawan.getAlamat() != null) existingKaryawan.setAlamat(karyawan.getAlamat());
+        if(karyawan.getTanggalMasuk() != null) existingKaryawan.setTanggalMasuk(karyawan.getTanggalMasuk());
+        if(karyawan.getDepartemen() != null) existingKaryawan.setDepartemen(karyawan.getDepartemen());
+        if(karyawan.getJabatan() != null) existingKaryawan.setJabatan(karyawan.getJabatan());
+        if(karyawan.getStatus() != null) existingKaryawan.setStatus(karyawan.getStatus());
 
         return karyawanRepo.save(existingKaryawan);
     }
 
     public void removeOne(Integer id) {
-        if(karyawanRepo.existsById(id)) {
-            throw new EntityNotFoundException("Absensi with ID " + id + " not found");
-        }
+        Karyawan existingKaryawan = this.findOne(id);
 
-        karyawanRepo.deleteById(id);
+        karyawanRepo.delete(existingKaryawan);
     }
 }

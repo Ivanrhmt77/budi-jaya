@@ -30,7 +30,7 @@ public class DepartemenService {
 
         List<Departemen> filteredDepartemens = departemens.stream()
             .filter(departemen -> (id == null || departemen.getId().equals(id)))
-            .filter(departemen -> (namaDepartemen == null || departemen.getnamaDepartemen().equalsIgnoreCase(namaDepartemen)))
+            .filter(departemen -> (namaDepartemen == null || departemen.getNamaDepartemen().equalsIgnoreCase(namaDepartemen)))
             .collect(Collectors.toList());
 
         if(filteredDepartemens.isEmpty()) {
@@ -49,7 +49,7 @@ public class DepartemenService {
     public Departemen updateOne(Integer id, Departemen departemen) {
         Departemen existingDepartemen = this.findOne(id);
 
-        existingDepartemen.setnamaDepartemen(departemen.getnamaDepartemen());
+        if(departemen.getNamaDepartemen() != null) existingDepartemen.setNamaDepartemen(departemen.getNamaDepartemen());
 
         return departemenRepo.save(existingDepartemen);
     }

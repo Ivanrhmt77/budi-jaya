@@ -25,7 +25,7 @@ public class Jabatan {
         return id;
     }
 
-    public String getnamaJabatan() {
+    public String getNamaJabatan() {
         return namaJabatan;
     }
 
@@ -33,7 +33,7 @@ public class Jabatan {
         this.id = id;
     }
 
-    public void setnamaJabatan(String namaJabatan) {
+    public void setNamaJabatan(String namaJabatan) {
         this.namaJabatan = namaJabatan;
     }
 }

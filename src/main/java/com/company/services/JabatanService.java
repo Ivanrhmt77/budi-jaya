@@ -30,7 +30,7 @@ public class JabatanService {
 
         List<Jabatan> filteredJabatans = jabatans.stream()
             .filter(jabatan -> (id == null || jabatan.getId().equals(id)))
-            .filter(jabatan -> (namaJabatan == null || jabatan.getnamaJabatan().equalsIgnoreCase(namaJabatan)))
+            .filter(jabatan -> (namaJabatan == null || jabatan.getNamaJabatan().equalsIgnoreCase(namaJabatan)))
             .collect(Collectors.toList());
 
         if(filteredJabatans.isEmpty()) {
@@ -49,7 +49,7 @@ public class JabatanService {
     public Jabatan updateOne(Integer id, Jabatan jabatan) {
         Jabatan existingJabatan = this.findOne(id);
 
-        existingJabatan.setnamaJabatan(jabatan.getnamaJabatan());
+        if(jabatan.getNamaJabatan() != null) existingJabatan.setNamaJabatan(jabatan.getNamaJabatan());
 
         return jabatanRepo.save(existingJabatan);
     }
