@@ -25,6 +25,10 @@ public class AbsensiService {
     private AbsensiRepo absensiRepo;
 
     public Absensi create(Absensi absensi) {
+        absensi.setWaktuKeluar(null);
+        absensi.setWaktuMasuk(null);
+        absensi.setStatus(null);
+
         return absensiRepo.save(absensi);
     }
 
@@ -41,6 +45,13 @@ public class AbsensiService {
             .filter(absensi -> (status == null || absensi.getStatus().equals(status)))
             .collect(Collectors.toList());
 
+        filteredAbsensis.forEach(absensi -> {
+            if(absensi.getStatus() == null && absensi.getTanggal().before(new Date())) {
+                absensi.setStatus(StatusAbsensi.ALPHA);
+                absensiRepo.save(absensi);
+            }
+        });
+
         if(filteredAbsensis.isEmpty()) {
             throw new EntityNotFoundException("Absensi not found");
         }
@@ -56,6 +67,13 @@ public class AbsensiService {
 
     public Absensi updateOne(Integer id, Absensi absensi) {
         Absensi existingAbsensi = this.findOne(id);
+
+        if(absensi.getStatus().equals(StatusAbsensi.HADIR)) {
+            if(existingAbsensi.getWaktuMasuk() == null)
+                absensi.setWaktuMasuk(LocalTime.now());
+            else if(existingAbsensi.getWaktuKeluar() == null)
+                absensi.setWaktuKeluar(LocalTime.now());
+        }
 
         if(absensi.getKaryawanId() != null) existingAbsensi.setKaryawanId(absensi.getKaryawanId());
         if(absensi.getStatus() != null) existingAbsensi.setStatus(absensi.getStatus());
