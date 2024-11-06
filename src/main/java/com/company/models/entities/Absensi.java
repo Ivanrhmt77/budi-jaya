@@ -1,12 +1,19 @@
 package com.company.models.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalTime;
 import java.util.Date;
 import com.company.models.entities.enums.StatusAbsensi;
 
 @Entity
 @Table(name = "absensi")
+@Setter
+@Getter
+@NoArgsConstructor
 public class Absensi {
 
     @Id
@@ -31,9 +38,6 @@ public class Absensi {
     @Column(name = "status_absensi", columnDefinition = "ENUM('HADIR', 'IZIN', 'SAKIT', 'ALPHA')")
     private StatusAbsensi status;
     
-    public Absensi() {
-    }
-
     public Absensi(Integer id, Karyawan karyawanId, Date tanggal, LocalTime waktuMasuk, LocalTime waktuKeluar, StatusAbsensi status) {
         this.id = id;
         this.karyawanId = karyawanId;
@@ -42,40 +46,5 @@ public class Absensi {
         this.waktuKeluar = waktuKeluar;
         this.status = status;
     }
-    public Integer getId() {
-        return id;
-    }
-    public Karyawan getKaryawanId() {
-        return karyawanId;
-    }
-    public Date getTanggal() {
-        return tanggal;
-    }
-    public LocalTime getWaktuMasuk() {
-        return waktuMasuk;
-    }
-    public LocalTime getWaktuKeluar() {
-        return waktuKeluar;
-    }
-    public StatusAbsensi getStatus() {
-        return status;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public void setKaryawanId(Karyawan karyawanId) {
-        this.karyawanId = karyawanId;
-    }
-    public void setTanggal(Date tanggal) {
-        this.tanggal = tanggal;
-    }
-    public void setWaktuMasuk(LocalTime waktuMasuk) {
-        this.waktuMasuk = waktuMasuk;
-    }
-    public void setWaktuKeluar(LocalTime waktuKeluar) {
-        this.waktuKeluar = waktuKeluar;
-    }
-    public void setStatus(StatusAbsensi status) {
-        this.status = status;
-    }
+   
 }

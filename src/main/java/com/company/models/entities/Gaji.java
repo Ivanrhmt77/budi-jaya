@@ -1,9 +1,15 @@
 package com.company.models.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "gaji")
+@Setter
+@Getter
+@NoArgsConstructor
 public class Gaji {
 
     @Id
@@ -28,9 +34,6 @@ public class Gaji {
 
     @Column(name = "total_gaji", nullable = false)
     private Double totalGaji;
-    
-    public Gaji() {
-    }
 
     public Gaji(Integer id, Karyawan karyawanId, String bulan, Double gajiPokok, Double tunjangan, Double potongan,
             Double totalGaji) {
@@ -40,48 +43,6 @@ public class Gaji {
         this.gajiPokok = gajiPokok;
         this.tunjangan = tunjangan;
         this.potongan = potongan;
-        this.totalGaji = totalGaji;
-    }
-    public Integer getId() {
-        return id;
-    }
-    public Karyawan getKaryawanId() {
-        return karyawanId;
-    }
-    public String getBulan() {
-        return bulan;
-    }
-    public Double getGajiPokok() {
-        return gajiPokok;
-    }
-    public Double getTunjangan() {
-        return tunjangan;
-    }
-    public Double getPotongan() {
-        return potongan;
-    }
-    public Double getTotalGaji() {
-        return totalGaji;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public void setKaryawanId(Karyawan karyawanId) {
-        this.karyawanId = karyawanId;
-    }
-    public void setBulan(String bulan) {
-        this.bulan = bulan;
-    }
-    public void setGajiPokok(Double gajiPokok) {
-        this.gajiPokok = gajiPokok;
-    }
-    public void setTunjangan(Double tunjangan) {
-        this.tunjangan = tunjangan;
-    }
-    public void setPotongan(Double potongan) {
-        this.potongan = potongan;
-    }
-    public void setTotalGaji(Double totalGaji) {
         this.totalGaji = totalGaji;
     }
 

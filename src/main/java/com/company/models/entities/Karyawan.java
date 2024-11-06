@@ -1,12 +1,19 @@
 package com.company.models.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Date;
 import com.company.models.entities.enums.StatusKaryawan;
 
 @Entity
 @Table(name = "karyawan")
+@Setter
+@Getter
+@NoArgsConstructor
 public class Karyawan implements Serializable{
 
     @Id
@@ -45,9 +52,6 @@ public class Karyawan implements Serializable{
     @Column(name = "status", columnDefinition = "ENUM('AKTIF', 'NONAKTIF')")
     private StatusKaryawan status;
 
-    public Karyawan() {
-    }
-
     public Karyawan(Integer id, String namaLengkap, String email, String nomorTelepon, Date tanggalLahir, String alamat,
             Date tanggalMasuk, Departemen departemen, Jabatan jabatan, StatusKaryawan status) {
         this.id = id;
@@ -61,84 +65,5 @@ public class Karyawan implements Serializable{
         this.jabatan = jabatan;
         this.status = status;
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getNamaLengkap() {
-        return namaLengkap;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getNomorTelepon() {
-        return nomorTelepon;
-    }
-
-    public Date getTanggalLahir() {
-        return tanggalLahir;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public Date getTanggalMasuk() {
-        return tanggalMasuk;
-    }
-
-    public Departemen getDepartemen() {
-        return departemen;
-    }
-
-    public Jabatan getJabatan() {
-        return jabatan;
-    }
-
-    public StatusKaryawan getStatus() {
-        return status;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setNamaLengkap(String namaLengkap) {
-        this.namaLengkap = namaLengkap;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setNomorTelepon(String nomorTelepon) {
-        this.nomorTelepon = nomorTelepon;
-    }
-
-    public void setTanggalLahir(Date tanggalLahir) {
-        this.tanggalLahir = tanggalLahir;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
-    }
-
-    public void setTanggalMasuk(Date tanggalMasuk) {
-        this.tanggalMasuk = tanggalMasuk;
-    }
-
-    public void setDepartemen(Departemen departemen) {
-        this.departemen = departemen;
-    }
-
-    public void setJabatan(Jabatan jabatan) {
-        this.jabatan = jabatan;
-    }
-
-    public void setStatus(StatusKaryawan status) {
-        this.status = status;
-    }
+    
 }
