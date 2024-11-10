@@ -31,7 +31,7 @@ public class GajiService {
 
         List<Gaji> filteredGajis = gajis.stream()
             .filter(gaji -> (id == null || gaji.getId().equals(id)))
-            .filter(gaji -> (karyawanId == null || gaji.getKaryawanId().equals(karyawanId)))
+            .filter(gaji -> (karyawanId == null || gaji.getKaryawan().equals(karyawanId)))
             .filter(gaji -> (bulan == null || gaji.getBulan().equalsIgnoreCase(bulan)))
             .filter(gaji -> (gajiPokok == null || gaji.getGajiPokok().equals(gajiPokok)))
             .filter(gaji -> (tunjangan == null || gaji.getTunjangan().equals(tunjangan)))
@@ -55,7 +55,7 @@ public class GajiService {
     public Gaji updateOne(Integer id, Gaji gaji) {
         Gaji existingGaji = this.findOne(id);
 
-        if(gaji.getKaryawanId() != null) existingGaji.setKaryawanId(gaji.getKaryawanId());
+        if(gaji.getKaryawan() != null) existingGaji.setKaryawan(gaji.getKaryawan());
         if(gaji.getBulan() != null) existingGaji.setBulan(gaji.getBulan());
         if(gaji.getGajiPokok() != null) existingGaji.setGajiPokok(gaji.getGajiPokok());
         if(gaji.getPotongan() != null) existingGaji.setPotongan(gaji.getPotongan());

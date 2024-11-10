@@ -1,13 +1,28 @@
 package com.company.models.entities;
 
-import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+
+import com.company.models.entities.enums.JabatanLevel;
+import com.company.models.entities.enums.StatusKaryawan;
+import com.company.models.entities.enums.UserRole;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
-import java.util.Date;
-import com.company.models.entities.enums.StatusKaryawan;
 
 @Entity
 @Table(name = "karyawan")
@@ -29,41 +44,52 @@ public class Karyawan implements Serializable{
     @Column(name = "nomor_telepon", length = 15)
     private String nomorTelepon;
 
-    @Column(name = "tanggal_lahir")
+    @Column(name = "tanggal_lahir", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date tanggalLahir;
 
     @Column(name = "alamat", columnDefinition = "TEXT")
     private String alamat;
 
-    @Column(name = "tanggal_masuk")
+    @Column(name = "tanggal_masuk", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date tanggalMasuk;
 
-    @ManyToOne
-    @JoinColumn(name = "departemen_id", nullable = false)
+    @Column(name = "foto_profil", length = 255)
+    private String fotoProfil;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "departemen_id")
     private Departemen departemen;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jabatan_id", nullable = false)
     private Jabatan jabatan;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status", columnDefinition = "ENUM('AKTIF', 'NONAKTIF')")
-    private StatusKaryawan status;
+    @Column(name = "status_karyawan")
+    private StatusKaryawan statusKaryawan;
 
-    public Karyawan(Integer id, String namaLengkap, String email, String nomorTelepon, Date tanggalLahir, String alamat,
-            Date tanggalMasuk, Departemen departemen, Jabatan jabatan, StatusKaryawan status) {
-        this.id = id;
-        this.namaLengkap = namaLengkap;
-        this.email = email;
-        this.nomorTelepon = nomorTelepon;
-        this.tanggalLahir = tanggalLahir;
-        this.alamat = alamat;
-        this.tanggalMasuk = tanggalMasuk;
-        this.departemen = departemen;
-        this.jabatan = jabatan;
-        this.status = status;
+    public boolean isAdmin() {
+        return this.jabatan != null && 
+               (this.jabatan.getLevel() == JabatanLevel.DIRECTOR || 
+                this.jabatan.getLevel() == JabatanLevel.PRESIDENT);
+    }
+    
+    public boolean isManager() {
+        return this.jabatan != null && 
+                this.jabatan.getLevel() == JabatanLevel.MANAGER;
+    }
+    
+    public boolean isStaff() {
+        return this.jabatan != null && 
+               this.jabatan.getLevel() == JabatanLevel.STAFF;
+    }
+    
+    public UserRole getRole() {
+        if (isAdmin()) return UserRole.ADMIN;
+        if (isManager()) return UserRole.MANAGER;
+        return UserRole.KARYAWAN;
     }
     
 }

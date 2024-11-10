@@ -16,12 +16,15 @@ public class Gaji {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "karyawan_id", nullable = false)
-    private Karyawan karyawanId;
+    private Karyawan karyawan;
 
     @Column(name = "bulan", nullable = false, length = 10)
     private String bulan;
+
+    @Column(name = "tahun", nullable = false)
+    private Integer tahun;
 
     @Column(name = "gaji_pokok", nullable = false)
     private Double gajiPokok;
@@ -34,16 +37,5 @@ public class Gaji {
 
     @Column(name = "total_gaji", nullable = false)
     private Double totalGaji;
-
-    public Gaji(Integer id, Karyawan karyawanId, String bulan, Double gajiPokok, Double tunjangan, Double potongan,
-            Double totalGaji) {
-        this.id = id;
-        this.karyawanId = karyawanId;
-        this.bulan = bulan;
-        this.gajiPokok = gajiPokok;
-        this.tunjangan = tunjangan;
-        this.potongan = potongan;
-        this.totalGaji = totalGaji;
-    }
-
+    
 }

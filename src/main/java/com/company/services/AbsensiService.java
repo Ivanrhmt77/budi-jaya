@@ -27,7 +27,7 @@ public class AbsensiService {
     public Absensi create(Absensi absensi) {
         absensi.setWaktuKeluar(null);
         absensi.setWaktuMasuk(null);
-        absensi.setStatus(null);
+        absensi.setStatusAbsensi(null);
 
         return absensiRepo.save(absensi);
     }
@@ -38,16 +38,16 @@ public class AbsensiService {
 
         List<Absensi> filteredAbsensis = absensis.stream()
             .filter(absensi -> (id == null || absensi.getId().equals(id)))
-            .filter(absensi -> (karyawanId == null || absensi.getKaryawanId().equals(karyawanId)))
+            .filter(absensi -> (karyawanId == null || absensi.getKaryawan().equals(karyawanId)))
             .filter(absensi -> (tanggal == null || absensi.getTanggal().equals(tanggal)))
             .filter(absensi -> (waktuMasuk == null || absensi.getWaktuMasuk().equals(waktuMasuk)))
             .filter(absensi -> (waktuKeluar == null || absensi.getWaktuKeluar().equals(waktuKeluar)))
-            .filter(absensi -> (status == null || absensi.getStatus().equals(status)))
+            .filter(absensi -> (status == null || absensi.getStatusAbsensi().equals(status)))
             .collect(Collectors.toList());
 
         filteredAbsensis.forEach(absensi -> {
-            if(absensi.getStatus() == null && absensi.getTanggal().before(new Date())) {
-                absensi.setStatus(StatusAbsensi.ALPHA);
+            if(absensi.getStatusAbsensi() == null && absensi.getTanggal().before(new Date())) {
+                absensi.setStatusAbsensi(StatusAbsensi.ALPHA);
                 absensiRepo.save(absensi);
             }
         });
@@ -68,15 +68,15 @@ public class AbsensiService {
     public Absensi updateOne(Integer id, Absensi absensi) {
         Absensi existingAbsensi = this.findOne(id);
 
-        if(absensi.getStatus().equals(StatusAbsensi.HADIR)) {
+        if(absensi.getStatusAbsensi().equals(StatusAbsensi.HADIR)) {
             if(existingAbsensi.getWaktuMasuk() == null)
                 absensi.setWaktuMasuk(LocalTime.now());
             else if(existingAbsensi.getWaktuKeluar() == null)
                 absensi.setWaktuKeluar(LocalTime.now());
         }
 
-        if(absensi.getKaryawanId() != null) existingAbsensi.setKaryawanId(absensi.getKaryawanId());
-        if(absensi.getStatus() != null) existingAbsensi.setStatus(absensi.getStatus());
+        if(absensi.getKaryawan() != null) existingAbsensi.setKaryawan(absensi.getKaryawan());
+        if(absensi.getStatusAbsensi() != null) existingAbsensi.setStatusAbsensi(absensi.getStatusAbsensi());
         if(absensi.getTanggal() != null) existingAbsensi.setTanggal(absensi.getTanggal());
         if(absensi.getWaktuKeluar() != null) existingAbsensi.setWaktuKeluar(absensi.getWaktuKeluar());
         if(absensi.getWaktuMasuk() != null) existingAbsensi.setWaktuMasuk(absensi.getWaktuMasuk());

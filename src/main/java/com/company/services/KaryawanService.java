@@ -27,7 +27,11 @@ public class KaryawanService {
     public Karyawan create(Karyawan karyawan) {
         if (karyawanRepo.findByEmail(karyawan.getEmail()) != null) {
             throw new IllegalArgumentException("Email already exists: " + karyawan.getEmail());
-        }
+        } 
+
+        Departemen departemen = karyawan.getJabatan().getDepartemen();
+        karyawan.setDepartemen(departemen);
+
         return karyawanRepo.save(karyawan);
     }
 
@@ -45,7 +49,7 @@ public class KaryawanService {
             .filter(karyawan -> (tanggalMasuk == null || karyawan.getTanggalMasuk().equals(tanggalMasuk)))
             .filter(karyawan -> (departemen == null || karyawan.getDepartemen().equals(departemen)))
             .filter(karyawan -> (jabatan == null || karyawan.getJabatan().equals(jabatan)))
-            .filter(karyawan -> (status == null || karyawan.getStatus().equals(status)))
+            .filter(karyawan -> (status == null || karyawan.getStatusKaryawan().equals(status)))
             .collect(Collectors.toList());
         
         if(filteredKaryawans.isEmpty()) {
@@ -72,7 +76,7 @@ public class KaryawanService {
         if(karyawan.getTanggalMasuk() != null) existingKaryawan.setTanggalMasuk(karyawan.getTanggalMasuk());
         if(karyawan.getDepartemen() != null) existingKaryawan.setDepartemen(karyawan.getDepartemen());
         if(karyawan.getJabatan() != null) existingKaryawan.setJabatan(karyawan.getJabatan());
-        if(karyawan.getStatus() != null) existingKaryawan.setStatus(karyawan.getStatus());
+        if(karyawan.getStatusKaryawan() != null) existingKaryawan.setStatusKaryawan(karyawan.getStatusKaryawan());
 
         return karyawanRepo.save(existingKaryawan);
     }

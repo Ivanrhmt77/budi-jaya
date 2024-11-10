@@ -20,11 +20,11 @@ public class Absensi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "karyawan_id", nullable = false)
-    private Karyawan karyawanId;
+    private Karyawan karyawan;
 
-    @Column(name = "tanggal")
+    @Column(name = "tanggal", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date tanggal;
 
@@ -35,16 +35,7 @@ public class Absensi {
     private LocalTime waktuKeluar;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_absensi", columnDefinition = "ENUM('HADIR', 'IZIN', 'SAKIT', 'ALPHA')")
-    private StatusAbsensi status;
-    
-    public Absensi(Integer id, Karyawan karyawanId, Date tanggal, LocalTime waktuMasuk, LocalTime waktuKeluar, StatusAbsensi status) {
-        this.id = id;
-        this.karyawanId = karyawanId;
-        this.tanggal = tanggal;
-        this.waktuMasuk = waktuMasuk;
-        this.waktuKeluar = waktuKeluar;
-        this.status = status;
-    }
+    @Column(name = "status_absensi")
+    private StatusAbsensi statusAbsensi;
    
 }
