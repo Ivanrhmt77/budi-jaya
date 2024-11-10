@@ -44,4 +44,8 @@ public class Tugas {
     @Column(name = "feedback", columnDefinition = "TEXT")
     private String feedback;
 
+    public Tugas(Integer id) {
+        this.id = id;
+    }
+
 }

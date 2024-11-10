@@ -53,4 +53,8 @@ public class Project {
     @JoinColumn(name = "manager_id", nullable = false)
     private Karyawan manager;
 
+    public Project(Integer id) {
+        this.id = id;
+    }
+
 }

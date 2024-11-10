@@ -1,13 +1,25 @@
 package com.company.models.entities;
 
-import jakarta.persistence.*;
+import java.time.LocalTime;
+import java.util.Date;
+
+import com.company.models.entities.enums.StatusAbsensi;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.time.LocalTime;
-import java.util.Date;
-import com.company.models.entities.enums.StatusAbsensi;
 
 @Entity
 @Table(name = "absensi")
@@ -20,7 +32,7 @@ public class Absensi {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "karyawan_id", nullable = false)
     private Karyawan karyawan;
 

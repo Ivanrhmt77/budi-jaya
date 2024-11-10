@@ -11,7 +11,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -58,17 +57,21 @@ public class Karyawan implements Serializable{
     @Column(name = "foto_profil", length = 255)
     private String fotoProfil;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "departemen_id")
     private Departemen departemen;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "jabatan_id", nullable = false)
     private Jabatan jabatan;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status_karyawan")
     private StatusKaryawan statusKaryawan;
+
+    public Karyawan(Integer id) {
+        this.id = id;
+    }
 
     public boolean isAdmin() {
         return this.jabatan != null && 

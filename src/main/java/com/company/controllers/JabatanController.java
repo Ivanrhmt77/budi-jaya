@@ -1,5 +1,7 @@
 package com.company.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.company.models.entities.Departemen;
 import com.company.models.entities.Jabatan;
+import com.company.models.entities.enums.JabatanLevel;
 import com.company.services.JabatanService;
 
 @RestController
@@ -21,14 +25,16 @@ public class JabatanController {
     private JabatanService jabatanService;
 
     @PostMapping
-    public Jabatan create(@RequestBody Jabatan jabatan) {
-        return jabatanService.create(jabatan);
+    public List<Jabatan> create(@RequestBody List<Jabatan> jabatanList) {
+        return jabatanService.create(jabatanList);
     }
 
     @GetMapping
     public Object find(@RequestParam(required = false) Integer id,
-                        @RequestParam(required = false) String namaJabatan) {
-        return jabatanService.find(id, namaJabatan);
+                        @RequestParam(required = false) String namaJabatan,
+                        @RequestParam(required = false) JabatanLevel level,
+                        @RequestParam(required = false) Departemen departemen) {
+        return jabatanService.find(id, namaJabatan, level, departemen);
     }
 
     @PutMapping("/update")

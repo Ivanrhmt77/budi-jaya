@@ -1,6 +1,13 @@
 package com.company.models.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +23,7 @@ public class Gaji {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "karyawan_id", nullable = false)
     private Karyawan karyawan;
 
@@ -37,5 +44,5 @@ public class Gaji {
 
     @Column(name = "total_gaji", nullable = false)
     private Double totalGaji;
-    
+
 }

@@ -24,4 +24,8 @@ public class Departemen {
     @Column(name = "nama_departemen", nullable = false, length = 100)
     private String namaDepartemen;
 
+    public Departemen(Integer id) {
+        this.id = id;
+    }
+
 }
