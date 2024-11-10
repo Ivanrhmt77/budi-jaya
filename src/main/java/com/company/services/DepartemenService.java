@@ -20,8 +20,8 @@ public class DepartemenService {
     @Autowired
     private DepartemenRepo departemenRepo;
 
-    public Departemen create(Departemen departemen) {
-        return departemenRepo.save(departemen);
+    public List<Departemen> create(List<Departemen> departemenList) {
+        return departemenRepo.saveAll(departemenList);
     }
 
     public List<Departemen> find(Integer id, String namaDepartemen) {

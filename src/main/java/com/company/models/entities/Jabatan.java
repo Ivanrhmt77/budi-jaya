@@ -37,7 +37,7 @@ public class Jabatan {
     private JabatanLevel level;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "departemen_id", nullable = false)
+    @JoinColumn(name = "departemen_id")
     private Departemen departemen;
 
     public UserRole getUserRole() {

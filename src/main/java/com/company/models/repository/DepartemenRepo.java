@@ -1,9 +1,9 @@
 package com.company.models.repository;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.company.models.entities.Departemen;
 
-public interface DepartemenRepo extends CrudRepository<Departemen, Integer> {
+public interface DepartemenRepo extends JpaRepository<Departemen, Integer> {
     
 }

@@ -1,5 +1,7 @@
 package com.company.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +23,8 @@ public class DepartemenController {
     private DepartemenService departemenService;
 
     @PostMapping
-    public Departemen create(@RequestBody Departemen departemen) {
-        return departemenService.create(departemen);
+    public List<Departemen> create(@RequestBody List<Departemen> departemenList) {
+        return departemenService.create(departemenList);
     }
 
     @GetMapping
