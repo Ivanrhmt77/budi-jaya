@@ -1,8 +1,8 @@
 package com.company.services;
 
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,18 +24,36 @@ public class KaryawanService {
     @Autowired
     private KaryawanRepo karyawanRepo;
 
-    public Karyawan create(Karyawan karyawan) {
-        if (karyawanRepo.findByEmail(karyawan.getEmail()) != null) {
-            throw new IllegalArgumentException("Email already exists: " + karyawan.getEmail());
-        } 
+    @Autowired
+    private JabatanService jabatanService;
 
-        Departemen departemen = karyawan.getJabatan().getDepartemen();
-        karyawan.setDepartemen(departemen);
+    public List<Karyawan> create(List<Karyawan> karyawanList) {
+        List<Karyawan> savedKaryawanList = new ArrayList<>();
 
-        return karyawanRepo.save(karyawan);
+        for (Karyawan karyawan : karyawanList) {
+            if (karyawanRepo.findByEmail(karyawan.getEmail()) != null) {
+                throw new IllegalArgumentException("Email already exists: " + karyawan.getEmail());
+            } 
+    
+            Integer jabatanId = karyawan.getJabatan().getId();
+            if (jabatanId == null) {
+                throw new IllegalArgumentException("Jabatan ID is required for Karyawan: " + karyawan.getNamaLengkap());
+            }
+
+            Jabatan jabatan = jabatanService.findOne(jabatanId);
+            
+            karyawan.setJabatan(jabatan);
+            karyawan.setDepartemen(jabatan.getDepartemen());
+            karyawan.setTanggalMasuk(LocalDate.now());
+            karyawan.setFotoProfil("../../../../src/main/resources/images/karyawan/profile.jpg");
+    
+            savedKaryawanList.add(karyawanRepo.save(karyawan));
+        }
+
+        return savedKaryawanList;
     }
 
-    public List<Karyawan> find(Integer id, String namaLengkap, String email, String nomorTelepon, Date tanggalLahir, String alamat, Date tanggalMasuk, Departemen departemen, Jabatan jabatan, StatusKaryawan status) {
+    public List<Karyawan> find(Integer id, String namaLengkap, String email, String nomorTelepon, LocalDate tanggalLahir, String alamat, LocalDate tanggalMasuk, Departemen departemen, Jabatan jabatan, StatusKaryawan status) {
         List<Karyawan> karyawans = new ArrayList<>();
         karyawanRepo.findAll().forEach(karyawans::add);
 
@@ -74,6 +92,7 @@ public class KaryawanService {
         if(karyawan.getTanggalLahir() != null) existingKaryawan.setTanggalLahir(karyawan.getTanggalLahir());
         if(karyawan.getAlamat() != null) existingKaryawan.setAlamat(karyawan.getAlamat());
         if(karyawan.getTanggalMasuk() != null) existingKaryawan.setTanggalMasuk(karyawan.getTanggalMasuk());
+        if(karyawan.getFotoProfil() != null) existingKaryawan.setFotoProfil(karyawan.getFotoProfil());
         if(karyawan.getDepartemen() != null) existingKaryawan.setDepartemen(karyawan.getDepartemen());
         if(karyawan.getJabatan() != null) existingKaryawan.setJabatan(karyawan.getJabatan());
         if(karyawan.getStatusKaryawan() != null) existingKaryawan.setStatusKaryawan(karyawan.getStatusKaryawan());

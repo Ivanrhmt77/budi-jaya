@@ -1,7 +1,7 @@
 package com.company.models.entities;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 import com.company.models.entities.enums.StatusAbsensi;
 
@@ -15,8 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,8 +35,7 @@ public class Absensi {
     private Karyawan karyawan;
 
     @Column(name = "tanggal", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date tanggal;
+    private LocalDate tanggal;
 
     @Column(name = "waktu_masuk")
     private LocalTime waktuMasuk;

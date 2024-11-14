@@ -1,8 +1,8 @@
 package com.company.services;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +32,7 @@ public class AbsensiService {
         return absensiRepo.save(absensi);
     }
 
-    public List<Absensi> find(Integer id, Karyawan karyawanId, Date tanggal, LocalTime waktuMasuk, LocalTime waktuKeluar, StatusAbsensi status) {
+    public List<Absensi> find(Integer id, Karyawan karyawanId, LocalDate tanggal, LocalTime waktuMasuk, LocalTime waktuKeluar, StatusAbsensi status) {
         List<Absensi> absensis = new ArrayList<>();
         absensiRepo.findAll().forEach(absensis::add);
 
@@ -46,7 +46,7 @@ public class AbsensiService {
             .collect(Collectors.toList());
 
         filteredAbsensis.forEach(absensi -> {
-            if(absensi.getStatusAbsensi() == null && absensi.getTanggal().before(new Date())) {
+            if(absensi.getStatusAbsensi() == null && absensi.getTanggal().isBefore(LocalDate.now())) {
                 absensi.setStatusAbsensi(StatusAbsensi.ALPHA);
                 absensiRepo.save(absensi);
             }

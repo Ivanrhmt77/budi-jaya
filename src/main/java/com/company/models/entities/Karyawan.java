@@ -1,11 +1,9 @@
 package com.company.models.entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 
-import com.company.models.entities.enums.JabatanLevel;
 import com.company.models.entities.enums.StatusKaryawan;
-import com.company.models.entities.enums.UserRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,8 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,15 +40,13 @@ public class Karyawan implements Serializable{
     private String nomorTelepon;
 
     @Column(name = "tanggal_lahir", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date tanggalLahir;
+    private LocalDate tanggalLahir;
 
     @Column(name = "alamat", columnDefinition = "TEXT")
     private String alamat;
 
     @Column(name = "tanggal_masuk", nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date tanggalMasuk;
+    private LocalDate tanggalMasuk;
 
     @Column(name = "foto_profil", length = 255)
     private String fotoProfil;
@@ -62,7 +56,7 @@ public class Karyawan implements Serializable{
     private Departemen departemen;
 
     @ManyToOne
-    @JoinColumn(name = "jabatan_id", nullable = false)
+    @JoinColumn(name = "jabatan_id")
     private Jabatan jabatan;
 
     @Enumerated(EnumType.STRING)
@@ -72,27 +66,9 @@ public class Karyawan implements Serializable{
     public Karyawan(Integer id) {
         this.id = id;
     }
-
-    public boolean isAdmin() {
-        return this.jabatan != null && 
-               (this.jabatan.getLevel() == JabatanLevel.DIRECTOR || 
-                this.jabatan.getLevel() == JabatanLevel.PRESIDENT);
-    }
-    
-    public boolean isManager() {
-        return this.jabatan != null && 
-                this.jabatan.getLevel() == JabatanLevel.MANAGER;
-    }
-    
-    public boolean isStaff() {
-        return this.jabatan != null && 
-               this.jabatan.getLevel() == JabatanLevel.STAFF;
-    }
-    
-    public UserRole getRole() {
-        if (isAdmin()) return UserRole.ADMIN;
-        if (isManager()) return UserRole.MANAGER;
-        return UserRole.KARYAWAN;
+        
+    public Karyawan(String email) {
+        this.email = email;
     }
     
 }

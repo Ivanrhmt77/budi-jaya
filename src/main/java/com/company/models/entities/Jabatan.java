@@ -1,7 +1,6 @@
 package com.company.models.entities;
 
 import com.company.models.entities.enums.JabatanLevel;
-import com.company.models.entities.enums.UserRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -39,20 +38,12 @@ public class Jabatan {
     @JoinColumn(name = "departemen_id")
     private Departemen departemen;
 
-    public UserRole getUserRole() {
-        switch (this.level) {
-            case DIRECTOR:
-            case PRESIDENT:
-                return UserRole.ADMIN;
-            case MANAGER:
-                return UserRole.MANAGER;
-            default:
-                return UserRole.KARYAWAN;
-        }
-    }
-
     public Jabatan(Integer id) {
         this.id = id;
+    }
+
+    public Jabatan(JabatanLevel level) {
+        this.level = level;
     }
 
 }

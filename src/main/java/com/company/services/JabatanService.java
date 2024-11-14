@@ -44,7 +44,7 @@ public class JabatanService {
         return filteredJabatans;
     }
 
-    private Jabatan findOne(Integer id) {
+    public Jabatan findOne(Integer id) {
         return jabatanRepo.findById(id).orElseThrow(() ->
             new EntityNotFoundException("Jabatan with ID " + id + " not found")
         );

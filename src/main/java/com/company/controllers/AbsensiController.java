@@ -1,7 +1,7 @@
 package com.company.controllers;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -34,7 +34,7 @@ public class AbsensiController {
     @GetMapping
     public Object find(@RequestParam(required = false) Integer id,
                         @RequestParam(required = false) Karyawan karyawanId,
-                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date tanggal,
+                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate tanggal,
                         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalTime waktuMasuk,
                         @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalTime waktuKeluar,
                         @RequestParam(required = false) StatusAbsensi status) {

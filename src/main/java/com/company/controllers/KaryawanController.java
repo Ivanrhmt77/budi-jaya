@@ -1,6 +1,7 @@
 package com.company.controllers;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,8 +28,8 @@ public class KaryawanController {
     private KaryawanService karyawanService;
 
     @PostMapping
-    public Karyawan create(@RequestBody Karyawan karyawan) {
-        return karyawanService.create(karyawan);
+    public List<Karyawan> create(@RequestBody List<Karyawan> karyawanList) {
+        return karyawanService.create(karyawanList);
     }
 
     @GetMapping
@@ -36,9 +37,9 @@ public class KaryawanController {
                         @RequestParam(required = false) String namaLengkap,
                         @RequestParam(required = false) String email,
                         @RequestParam(required = false) String nomorTelepon,
-                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date tanggalLahir,
+                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate tanggalLahir,
                         @RequestParam(required = false) String alamat,
-                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date tanggalMasuk,
+                        @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate tanggalMasuk,
                         @RequestParam(required = false) Departemen departemen,
                         @RequestParam(required = false) Jabatan jabatan,
                         @RequestParam(required = false) StatusKaryawan status) {
