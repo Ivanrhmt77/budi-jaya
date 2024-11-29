@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #18181B;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -31,7 +31,6 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
   overflow-x: hidden;
 }
 
@@ -70,8 +69,6 @@ h6 {
   line-height: 1.7;
   font-weight: bold;
 }
-
-
 
 button {
   border-radius: 8px;

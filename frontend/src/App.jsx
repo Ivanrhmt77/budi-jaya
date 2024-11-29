@@ -1,19 +1,20 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import KaryawanHome  from './pages/Home';
+import Karyawan from './pages/Karyawan';
 
 function App() {
   return (
     <Router>
-      <div className="bg-zinc-900 min-h-screen w-screen mx-auto">
+      <div className="bg-zinc-900 w-screen mx-auto">
         <Navbar />
-        <div className='bg-zinc-900 min-h-screen rounded-4xl mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'></div>
-        {/* <div className="container mx-auto px-4 py-8">
+        <div className='container my-24 bg-zinc-900 rounded-4xl mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/patients" element={<Patients />} />
+            <Route path="/" element={<KaryawanHome />} />
+            <Route path="/Karyawan" element={<Karyawan />} />
           </Routes>
-        </div>  */}
+        </div>
       </div>
     </Router>
   )
