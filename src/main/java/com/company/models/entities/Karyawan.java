@@ -69,6 +69,5 @@ public class Karyawan implements Serializable{
         
     public Karyawan(String email) {
         this.email = email;
-    }
-    
+    }    
 }
