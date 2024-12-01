@@ -33,10 +33,6 @@ public class DepartemenService {
             .filter(departemen -> (namaDepartemen == null || departemen.getNamaDepartemen().equalsIgnoreCase(namaDepartemen)))
             .collect(Collectors.toList());
 
-        if(filteredDepartemens.isEmpty()) {
-            throw new EntityNotFoundException("Departemen not found");
-        }
-
         return filteredDepartemens;
     }
 

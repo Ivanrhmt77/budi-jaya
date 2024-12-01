@@ -1,9 +1,8 @@
 import React from 'react';
 
-const ProfileCard = ({ href, image, name, title, email, phone }) => {
+const ProfileCard = ({image, name, title, email, phone }) => {
   return (
-    <a 
-      href={href} 
+    <div 
       className="w-64 bg-white text-black rounded-lg shadow-md overflow-hidden group"
     >
       <div className='overflow-hidden'>
@@ -37,7 +36,7 @@ const ProfileCard = ({ href, image, name, title, email, phone }) => {
           </a>
         </div>
       </div>
-    </a>
+    </div>
   );
 };
 

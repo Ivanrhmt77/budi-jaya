@@ -1,4 +1,4 @@
-function KaryawanHome() {
+function Home() {
     return(
         <div>
             <p>cihuy</p>
@@ -6,4 +6,4 @@ function KaryawanHome() {
     )
 }
 
-export default KaryawanHome;
+export default Home;

@@ -1,7 +1,6 @@
 package com.company.controllers;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,8 +27,8 @@ public class KaryawanController {
     private KaryawanService karyawanService;
 
     @PostMapping
-    public List<Karyawan> create(@RequestBody List<Karyawan> karyawanList) {
-        return karyawanService.create(karyawanList);
+    public Karyawan create(@RequestBody Karyawan karyawan) {
+        return karyawanService.create(karyawan);
     }
 
     @GetMapping

@@ -7,15 +7,38 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Navbar() {
+export default function Navbar({ userRole = 'karyawan' }) {
   const location = useLocation();
 
-  const navigation = [
-    { name: 'Home', href: '/', current: location.pathname === '/' },
-    { name: 'Karyawan', href: '/Karyawan', current: location.pathname === '/Karyawan' },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
-  ];
+  const navigationConfig = {
+    manager: [
+      { name: 'Home', href: '/manager', current: location.pathname === '/manager' },
+      { name: 'Karyawan', href: '/manager/Karyawan', current: location.pathname === '/manager/Karyawan' },
+      { name: 'Tim', href: '/manager/tim', current: location.pathname === '/manager/tim' },
+    ],
+    karyawan: [
+      { name: 'Home', href: '/', current: location.pathname === '/' },
+      { name: 'Karyawan', href: '/Karyawan', current: location.pathname === '/Karyawan' },
+      { name: 'Absensi', href: '/Absensi', current: location.pathname === '/Absensi' },
+    ]
+  };
+
+  const determineRole = () => {
+    if (location.pathname.startsWith('/manager')) {
+      return 'manager';
+    }
+    return 'karyawan';
+  };
+
+  const activeRole = determineRole();
+  const navigation = navigationConfig[activeRole] || navigationConfig.karyawan;
+
+  const logoConfig = {
+    manager: 'Budi-Jaya (Manager)',
+    karyawan: 'Budi-Jaya'
+  };
+
+  const logo = logoConfig[activeRole] || 'Budi-Jaya';
 
   return (
     <Disclosure as="nav" className="bg-gray-800 fixed w-screen top-0 z-50">
@@ -23,7 +46,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo (Left) */}
           <div className="flex-none">
-            <h4 className="text-white font-bold text-xl">Budi-Jaya</h4>
+            <h4 className="text-white font-bold text-xl">{logo}</h4>
           </div>
 
           {/* Navigation Menu (Center) */}

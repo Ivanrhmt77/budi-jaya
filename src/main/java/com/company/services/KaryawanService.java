@@ -27,31 +27,24 @@ public class KaryawanService {
     @Autowired
     private JabatanService jabatanService;
 
-    public List<Karyawan> create(List<Karyawan> karyawanList) {
-        List<Karyawan> savedKaryawanList = new ArrayList<>();
-
-        for (Karyawan karyawan : karyawanList) {
-            if (karyawanRepo.findByEmail(karyawan.getEmail()) != null) {
-                throw new IllegalArgumentException("Email already exists: " + karyawan.getEmail());
-            } 
-    
-            Integer jabatanId = karyawan.getJabatan().getId();
-            if (jabatanId == null) {
-                throw new IllegalArgumentException("Jabatan ID is required for Karyawan: " + karyawan.getNamaLengkap());
-            }
-
-            Jabatan jabatan = jabatanService.findOne(jabatanId);
-            
-            karyawan.setJabatan(jabatan);
-            karyawan.setDepartemen(jabatan.getDepartemen());
-            karyawan.setTanggalMasuk(LocalDate.now());
-            karyawan.setFotoProfil("../../../../src/main/resources/images/karyawan/profile.jpg");
-    
-            savedKaryawanList.add(karyawanRepo.save(karyawan));
+    public Karyawan create(Karyawan karyawan) {
+        if (karyawanRepo.findByEmail(karyawan.getEmail()) != null) {
+            throw new IllegalArgumentException("Email already exists: " + karyawan.getEmail());
         }
-
-        return savedKaryawanList;
-    }
+    
+        Integer jabatanId = karyawan.getJabatan().getId();
+        if (jabatanId == null) {
+            throw new IllegalArgumentException("Jabatan ID is required for Karyawan: " + karyawan.getNamaLengkap());
+        }
+    
+        Jabatan jabatan = jabatanService.findOne(jabatanId);
+        karyawan.setJabatan(jabatan);
+        karyawan.setDepartemen(jabatan.getDepartemen());
+        karyawan.setTanggalMasuk(LocalDate.now());
+        karyawan.setFotoProfil("profile.jpg");
+    
+        return karyawanRepo.save(karyawan);
+    }    
 
     public List<Karyawan> find(Integer id, String namaLengkap, String email, String nomorTelepon, LocalDate tanggalLahir, String alamat, LocalDate tanggalMasuk, Departemen departemen, Jabatan jabatan, StatusKaryawan status) {
         List<Karyawan> karyawans = new ArrayList<>();
@@ -69,10 +62,6 @@ public class KaryawanService {
             .filter(karyawan -> (jabatan == null || karyawan.getJabatan().equals(jabatan)))
             .filter(karyawan -> (status == null || karyawan.getStatusKaryawan().equals(status)))
             .collect(Collectors.toList());
-        
-        if(filteredKaryawans.isEmpty()) {
-            throw new EntityNotFoundException("Karyawan not found");
-        }
 
         return filteredKaryawans;
     }

@@ -101,3 +101,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(32%) sepia(29%) saturate(745%) hue-rotate(163deg) brightness(95%) contrast(84%);
+  cursor: pointer;
+}
+
+select {
+  cursor: pointer;
+}

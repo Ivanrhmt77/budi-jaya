@@ -37,10 +37,6 @@ public class JabatanService {
             .filter(jabatan -> (departemen == null || jabatan.getDepartemen().equals(departemen)))
             .collect(Collectors.toList());
 
-        if(filteredJabatans.isEmpty()) {
-            new EntityNotFoundException("Jabatan not found");
-        }
-
         return filteredJabatans;
     }
 
