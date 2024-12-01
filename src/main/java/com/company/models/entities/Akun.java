@@ -52,8 +52,10 @@ public class Akun implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.name());
-        return Collections.singletonList(authority);
+        // Implementasi authorities berdasarkan role
+        return Collections.singletonList(
+            new SimpleGrantedAuthority(role.name())
+        );
     }
 
     @Override
